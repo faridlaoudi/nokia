@@ -1,0 +1,150 @@
+{
+  "name": "srlceos01",
+  "type": "clab",
+  "clab": {
+    "config": {
+      "prefix": "clab",
+      "mgmt": {
+        "network": "clab",
+        "bridge": "br-f68d01dd4dfc",
+        "ipv4-subnet": "172.20.20.0/24",
+        "ipv4-gw": "172.20.20.1",
+        "ipv6-subnet": "2001:172:20:20::/64",
+        "ipv6-gw": "2001:172:20:20::1",
+        "mtu": 1500,
+        "external-access": true
+      }
+    }
+  },
+  "nodes": {
+    "ceos": {
+      "index": "0",
+      "shortname": "ceos",
+      "longname": "clab-srlceos01-ceos",
+      "fqdn": "ceos.srlceos01.io",
+      "group": "",
+      "labdir": "/home/faridlaoudi/projects/nokia/clab-srlceos01/ceos",
+      "kind": "ceos",
+      "image": "ceos:4.31.2F",
+      "mgmt-net": "",
+      "mgmt-intf": "Management0",
+      "mgmt-ipv4-address": "172.20.20.2",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::2",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "00:1c:73:9f:ce:0c",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-f68d01dd4dfc",
+        "clab-node-group": "",
+        "clab-node-kind": "ceos",
+        "clab-node-lab-dir": "/home/faridlaoudi/projects/nokia/clab-srlceos01/ceos",
+        "clab-node-name": "ceos",
+        "clab-node-type": "",
+        "clab-topo-file": "/home/faridlaoudi/projects/nokia/rr.clab.yml",
+        "containerlab": "srlceos01"
+      },
+      "port-bindings": [
+      ]
+    },
+    "gobgp": {
+      "index": "1",
+      "shortname": "gobgp",
+      "longname": "clab-srlceos01-gobgp",
+      "fqdn": "gobgp.srlceos01.io",
+      "group": "",
+      "labdir": "/home/faridlaoudi/projects/nokia/clab-srlceos01/gobgp",
+      "kind": "linux",
+      "image": "ghcr.io/hellt/network-multitool:latest",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.4",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::4",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-f68d01dd4dfc",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/home/faridlaoudi/projects/nokia/clab-srlceos01/gobgp",
+        "clab-node-name": "gobgp",
+        "clab-node-type": "",
+        "clab-topo-file": "/home/faridlaoudi/projects/nokia/rr.clab.yml",
+        "containerlab": "srlceos01"
+      },
+      "port-bindings": [
+        {
+          "host-ip": "",
+          "host-port": 0,
+          "port": 443,
+          "protocol": "tcp"
+        },
+        {
+          "host-ip": "",
+          "host-port": 0,
+          "port": 80,
+          "protocol": "tcp"
+        }
+      ]
+    },
+    "srl": {
+      "index": "2",
+      "shortname": "srl",
+      "longname": "clab-srlceos01-srl",
+      "fqdn": "srl.srlceos01.io",
+      "group": "",
+      "labdir": "/home/faridlaoudi/projects/nokia/clab-srlceos01/srl",
+      "kind": "nokia_srlinux",
+      "image": "ghcr.io/nokia/srlinux:latest",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.3",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::3",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "1a:ad:02:00:00:00",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-f68d01dd4dfc",
+        "clab-node-group": "",
+        "clab-node-kind": "nokia_srlinux",
+        "clab-node-lab-dir": "/home/faridlaoudi/projects/nokia/clab-srlceos01/srl",
+        "clab-node-name": "srl",
+        "clab-node-type": "ixrd2",
+        "clab-topo-file": "/home/faridlaoudi/projects/nokia/rr.clab.yml",
+        "containerlab": "srlceos01"
+      },
+      "port-bindings": [
+      ]
+    }
+  },
+  "links": [
+    {
+      "a": {
+        "node": "srl",
+        "interface": "e1-1",
+        "mac": "aa:c1:ab:d9:a8:8a",
+        "peer": "z"
+      },
+      "z": {
+        "node": "ceos",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:af:8d:26",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "ceos",
+        "interface": "eth2",
+        "mac": "aa:c1:ab:1b:ff:c4",
+        "peer": "z"
+      },
+      "z": {
+        "node": "gobgp",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:b0:81:b5",
+        "peer": "a"
+      }
+    }
+  ]
+}
